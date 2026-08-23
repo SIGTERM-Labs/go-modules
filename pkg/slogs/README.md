@@ -9,7 +9,7 @@ Slog was introduced in Go 1.21, so that is the minimum required Go version to us
 ```go
 package main
 
-import "github.com/chia-network/go-modules/pkg/slogs"
+import "github.com/SIGTERM-Labs/go-modules/pkg/slogs"
 
 func main() {
 	// Init the logger with a log-level string (debug, info, warn, error)
@@ -35,7 +35,7 @@ import (
 	
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-	"github.com/chia-network/go-modules/pkg/slogs"
+	"github.com/SIGTERM-Labs/go-modules/pkg/slogs"
 )
 
 var rootCmd = &cobra.Command{
