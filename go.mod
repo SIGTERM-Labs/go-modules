@@ -1,4 +1,4 @@
-module github.com/chia-network/go-modules
+module github.com/SIGTERM-Labs/go-modules
 
 go 1.25.0
 
