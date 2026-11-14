@@ -1,9 +1,10 @@
 module github.com/SIGTERM-Labs/go-modules
 
-go 1.26.0
+go 1.26.10
 
 require (
 	github.com/lestrrat-go/jwx v1.2.31
+	github.com/lestrrat-go/jwx/v4 v4.6.0
 	github.com/pkg/errors v0.9.1
 	github.com/prometheus/client_golang v1.25.0
 	golang.org/x/sys v0.50.0
