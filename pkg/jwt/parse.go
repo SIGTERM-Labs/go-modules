@@ -11,6 +11,10 @@ import (
 	"github.com/pkg/errors"
 )
 
+// jwksClient is shared across requests so its HTTP transport (and connection pool) is reused
+// rather than rebuilt per request. jwkfetch.Client is safe for concurrent use.
+var jwksClient = jwkfetch.NewClient()
+
 // rawJWTFromAuthHeader returns a raw jwt token from the auth header
 func rawJWTFromAuthHeader(r *http.Request) string {
 	auth := r.Header.Get("Authorization")
@@ -24,7 +28,7 @@ func rawJWTFromAuthHeader(r *http.Request) string {
 
 // ParseTokenFromRequestWithJWKS Parses a jwt.Token from an Auth header, validating with JWKS Keys from an endpoint
 func ParseTokenFromRequestWithJWKS(r *http.Request, jwksEndpoint string) (jwt.Token, error) {
-	keyset, err := jwkfetch.NewClient().Fetch(r.Context(), jwksEndpoint)
+	keyset, err := jwksClient.Fetch(r.Context(), jwksEndpoint)
 	if err != nil {
 		return nil, errors.Wrap(err, "ParseTokenFromHeaderWithJWKS():jwkfetch.Fetch()")
 	}
