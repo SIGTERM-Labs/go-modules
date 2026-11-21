@@ -35,9 +35,11 @@ func ParseTokenFromRequestWithJWKS(r *http.Request, jwksEndpoint string) (jwt.To
 
 	// Disable "infer algorithm" so this always uses the algorithm specified at the jwks endpoint or fails
 	// (avoid something along the lines of https://auth0.com/blog/critical-vulnerabilities-in-json-web-token-libraries/)
-	// ParseString also validates essential claims (exp, nbf, iat) with the given skew
+	// Validate essential claims (exp, nbf, iat) with the given skew. Validation is on by default in v4,
+	// but it is set explicitly so a future default change can't silently disable it.
 	token, err := jwt.ParseString(rawJWTFromAuthHeader(r),
 		jwt.WithKeySet(keyset, jws.WithInferAlgorithmFromKey(false)),
+		jwt.WithValidate(true),
 		jwt.WithAcceptableSkew(60*time.Second),
 	)
 	if err != nil {
