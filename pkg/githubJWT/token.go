@@ -1,11 +1,10 @@
 package githubjwt
 
 import (
-	"context"
 	"encoding/json"
 	"time"
 
-	"github.com/lestrrat-go/jwx/jwt"
+	"github.com/lestrrat-go/jwx/v4/jwt"
 	"github.com/pkg/errors"
 )
 
@@ -41,9 +40,9 @@ type GithubJWT struct {
 
 // TransformTokenToGithubClaims takes a jwt.Token and transforms it to the structured claims provided
 func TransformTokenToGithubClaims(token jwt.Token) (*GithubJWT, error) {
-	asMap, err := token.AsMap(context.TODO())
-	if err != nil {
-		return nil, err
+	asMap := make(map[string]any)
+	for k, v := range token.Claims() {
+		asMap[k] = v
 	}
 
 	jsonToken, err := json.Marshal(asMap)
