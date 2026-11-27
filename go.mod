@@ -4,7 +4,7 @@ go 1.26.10
 
 require (
 	github.com/jwx-go/jwkfetch/v4 v4.0.4
-	github.com/lestrrat-go/jwx/v4 v4.6.0
+	github.com/lestrrat-go/jwx/v4 v4.7.0
 	github.com/pkg/errors v0.9.1
 	github.com/prometheus/client_golang v1.25.0
 	golang.org/x/sys v0.50.0
